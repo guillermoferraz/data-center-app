@@ -1,0 +1,26 @@
+@import '../app.component.scss';
+
+.root_container{
+    margin: auto;
+    padding: 0;
+    height: 100vh;
+    background-color: $lightBgPrimary;
+}
+.container_logo{
+    width: 180px;
+    height: 120px;
+    margin: auto;
+    padding: 0;
+}
+.container_form {
+    display: flex;
+}
+.form{
+    max-width: 100%;
+    margin: auto;
+    padding: 0;
+}
+.container_inputs{
+    width: 100%;
+}
+

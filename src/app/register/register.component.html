@@ -1,0 +1,29 @@
+<div class="root_container">
+    <div class="container_logo">
+      <img src="../../assets/logo2.png"/>
+    </div>
+    <div class="container_form">
+      <form class="form" (ngSubmit)="handleSubmit(formData.form.value)" #formData="ngForm">
+        <div class="container_inputs">
+          <div class="container_input" *ngFor="let entry of entries">
+            <input
+            class="input"
+            [type]="entry.type" 
+            [id]="entry.id" 
+            [name]="entry.name" 
+            [placeholder]="entry.placeholder"
+            ngModel
+            />
+            <p class="error">{{ entry.error.status ? entry.error.message : ''}}</p>
+        </div>
+        </div>
+        <p class="info">
+          Do you already have an account ?&nbsp;
+          <a class="hyperlink" routerLink="/login">Login</a>
+        </p>
+        <div class="container_btn">
+          <button class="btn-submit" type="submit">SignUp</button>
+        </div>
+      </form>
+    </div>
+  </div>

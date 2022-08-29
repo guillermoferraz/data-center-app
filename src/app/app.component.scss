@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+$bluePrimary: #3d43ff;
+$greenPrimary: #13c75e;
+$blackPrimary: #000c24;
+$whitePrimary: #e5ece3;
+$lightBgPrimary: rgb(230, 234, 240);
+$ligthBorderGray:  rgb(105, 97, 97);
+$errorPrimary: #d61010;
+
+/* Input Global styles */
+.input{
+    border: 1px solid $ligthBorderGray;
+    height: 100%;
+    padding: 0px 15px 0px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    &:focus-visible{
+        outline: 1px solid $greenPrimary
+    }
+}
+.container_input{
+    width: 100%;
+    height: 40px;
+    margin: 25px
+}
+
+/* Button Global styles  */
+.container_btn{
+    margin: 0px 25px 0px 25px;
+    height: 40px;
+}
+.btn-submit{
+    border: 1px solid $greenPrimary;
+    background-color: $greenPrimary;
+    color: $blackPrimary;
+    border-radius: 5px;
+    font-weight: 600;
+    box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
+    font-size: 14px;
+    width: 100%;
+    height: 100%;
+    &:hover{
+        opacity: .75;
+    }
+}
+.hyperlink{
+    color: $bluePrimary;
+}
+.info{
+    font-size: 12px;
+    margin: 0px 0px 10px 25px;
+}
+
+/* input error message */
+.error{
+    margin: 0px 0px 0px 10px;
+    font-size: 14px;
+    color: $errorPrimary
+}
