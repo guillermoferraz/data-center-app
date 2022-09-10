@@ -1,4 +1,10 @@
 <div class="root_container">
+    <div *ngIf="message.active && message.type === 'error'" class="alert_error">
+        <h1>{{message.message}}</h1>
+    </div>
+    <div *ngIf="message.active && message.type === 'success'" class="alert_success">
+      <h1>{{message.message}}</h1>
+    </div>
     <div class="container_logo">
       <img src="../../assets/logo2.png"/>
     </div>

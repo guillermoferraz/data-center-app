@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { AuthService } from '../services/auth.service';
 interface EntryTypes {
   id: string;
   name: string;
@@ -15,8 +15,13 @@ interface OnSubmitTypes {
   password: string|undefined;
   conf_password: string|undefined;
 }
+type RegisterDataTypes = Omit<OnSubmitTypes, 'conf_email'| 'conf_password'>
 
-
+interface MessageType {
+  active: boolean;
+  type: string;
+  message: string;
+}
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -24,7 +29,7 @@ interface OnSubmitTypes {
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
   }
@@ -72,16 +77,70 @@ export class RegisterComponent implements OnInit {
       error: { status: false, message: '' }
     }
   ];
-  handleSubmit(formData: OnSubmitTypes){
 
-    console.log('FormData:', formData)
-    console.log('obj:',Object.values(formData))
+  message: MessageType = {
+    type: "",
+    active: false,
+    message: ""
+  }
+
+  cleanMessage = () => {
+    setTimeout(() => {
+      this.message = {
+        type: "",
+        active: false,
+        message: ""
+      }
+    },2500)
+  }
+
+  setMessage(data: any){
+    if(data?.status === 409) {
+      this.message = {
+        type: "error",
+        active: true,
+        message: data?.error?.message
+      }
+      this.cleanMessage()
+    } else if (data?.status === 200){
+      this.message = {
+        type: "success",
+        active: true,
+        message: data.message
+      }
+      sessionStorage.setItem('tkn', data.token)
+      this.cleanMessage()
+    }
+  }
+  
+
+  handleSubmit(formData: OnSubmitTypes){
     this.entries[0].error = { status: Boolean(!formData.firstname), message: 'The firstname is required' }
     this.entries[1].error = { status: Boolean(!formData.lastname), message: 'The lastname is required' }
     this.entries[2].error = {status: Boolean(!formData.email), message: 'The email is required' }
     this.entries[3].error = {status: Boolean(!formData.conf_email || (formData.conf_email !== formData.email)), message: 'The email and cofirmation do not match'}
     this.entries[4].error = {status: Boolean(!formData.password), message: 'The password is required'}
     this.entries[5].error = {status: Boolean(!formData.conf_password || (formData.conf_password !== formData.password)), message: 'The password and confirmation do not match'}
+
+    const registerData: RegisterDataTypes = {
+      firstname: formData.firstname || "",
+      lastname: formData.lastname || "",
+      email: formData.email || "",
+      password: formData.password || "",
+    }
+
+     const enableSubmit =  this.entries.map(v => !v.error.status ).filter(e => !e)
+     if(enableSubmit.length === 0) {
+      this.authService
+      .register(registerData)
+      .subscribe(
+        {
+          next: (res) => this.setMessage(res),
+          error: (error) => this.setMessage(error)
+        }
+        )
+     }
+
   }
 
 }
