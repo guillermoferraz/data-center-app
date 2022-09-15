@@ -1,1 +1,4 @@
 <p>home works! and user exist</p>
+<div *ngIf="user && user.Id" class="alert alert_error">
+    <h1>{{user.Firstname}}&nbsp;{{user.Lastname}}</h1>
+  </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 interface EntryTypes {
   id: string;
   name: string;
@@ -29,7 +30,7 @@ interface MessageType {
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -108,7 +109,9 @@ export class RegisterComponent implements OnInit {
         active: true,
         message: data.message
       }
-      sessionStorage.setItem('tkn', data.token)
+      setTimeout(() => {
+        this.router.navigate(['login'])
+      },1500)
       this.cleanMessage()
     }
   }

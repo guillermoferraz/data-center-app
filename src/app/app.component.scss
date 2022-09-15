@@ -9,6 +9,8 @@ $whitePrimary: #e5ece3;
 $lightBgPrimary: rgb(230, 234, 240);
 $ligthBorderGray:  rgb(105, 97, 97);
 $errorPrimary: #d61010;
+$errorBackground: rgba(230, 33, 33, 0.5);
+$successBackground: rgba(63, 243, 102, 0.5);
 
 /* Input Global styles */
 .input{
@@ -59,4 +61,23 @@ $errorPrimary: #d61010;
     margin: 0px 0px 0px 10px;
     font-size: 14px;
     color: $errorPrimary
+}
+.alert {
+    position: fixed;
+    text-align: center;
+    left: 0px;
+    right: 0px;
+    top: 2%;
+    width: max-content;
+    margin: auto;
+    padding: 10px 20px 10px 20px;
+    border-radius: 5px;
+}
+.alert_error {
+    color : $errorPrimary;
+    background-color: $errorBackground;
+}
+.alert_success{
+    color: $greenPrimary;
+    background-color: $successBackground;
 }
