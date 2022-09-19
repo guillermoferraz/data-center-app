@@ -28,7 +28,6 @@ export class HomeComponent implements OnInit {
     .subscribe(
       {
         next: (res: UserType | any ) => {
-          console.log('res home:', res)
           if(res.status === 200){
            this.setUser({
               Id: res.Id,

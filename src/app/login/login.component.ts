@@ -89,10 +89,9 @@ export class LoginComponent implements OnInit {
         .subscribe(
           {
             next: (res) => {
-              console.log("login res:", res)
               const token: string | undefined = res?.user?.Token;
               token && sessionStorage.setItem('tkn', token)
-              this.setMessage(res)             
+              this.setMessage(res)
             },
             error: (error) => this.setMessage(error)
           }
